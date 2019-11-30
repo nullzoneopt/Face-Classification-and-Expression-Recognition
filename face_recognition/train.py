@@ -1,8 +1,9 @@
 import cv2
-import sys
 import numpy
-import os
-from PIL import Image, ImageOps
+from utils import helper as helper
+# import sys
+# import os
+# from PIL import Image, ImageOps
 
 haar_file = '..\\haar_classifiers\\haarcascade_frontalface_default.xml'
 haar_file_side = '..\\haar_classifiers\\haarcascade_profileface.xml'
@@ -13,17 +14,8 @@ fn_dir = 'database'
 print('Training starts please wait....')
 
 # Create a list of images and a list of corresponding names
-(images, labels, names, id) = ([], [], {}, 0)
-for (subdirs, dirs, files) in os.walk(fn_dir):
-    for subdir in dirs:
-        names[id] = subdir
-        subjectpath = os.path.join(fn_dir, subdir)
-        for filename in os.listdir(subjectpath):
-            path = subjectpath + '/' + filename
-            label = id
-            images.append(cv2.imread(path, 0))
-            labels.append(int(label))
-        id += 1
+images, labels = helper.generate_dataset(fn_dir)
+
 (im_width, im_height) = (112, 92)
 # (im_width, im_height) = (48, 48)
 
