@@ -10,7 +10,7 @@ def evaluate(model, X_train, y_train):
     correct = 0
     incorrect = 0
     for image in X_train:
-        pred = model.predict(image)
+        pred, conf = model.predict(image)
         if pred == y_train[cnt]:
             correct += 1
             cnt += 1
@@ -38,7 +38,7 @@ training_fold_accuracy = {}
 testing_fold_accuracy = {}
 testing_accuracy = {}
 model = cv2.face.LBPHFaceRecognizer_create()
-
+# model = cv2.createFisherFaceRecognizer()
 for train_index, test_index in cv.split(x_train):  # OpenCV trains a model from the images
     X_train_fold, X_test_fold, y_train_fold, y_test_fold = x_train[train_index], x_train[test_index], \
                                                            y_train[train_index], y_train[test_index]

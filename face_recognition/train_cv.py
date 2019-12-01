@@ -10,7 +10,7 @@ def evaluate(model, X_train, y_train):
     correct = 0
     incorrect = 0
     for image in X_train:
-        pred = model.predict(image)
+        pred, conf = model.predict(image)
         if pred == y_train[cnt]:
             correct += 1
             cnt += 1
