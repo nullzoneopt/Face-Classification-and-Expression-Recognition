@@ -7,7 +7,6 @@ from PIL import Image, ImageOps
 class Database:
     def __init__(self):
         self.front_haar = "..\\haar_classifiers\\haarcascade_frontalface_default.xml"  # "haarcascade_profileface.xml"# 'haarcascade_frontalface_default.xml'
-        self.side_haar = "..\\haar_classifiers\\haarcascade_profileface.xml"  # "haarcascade_profileface.xml"# 'haarcascade_frontalface_default.xml'
         self.image_width = 112
         self.image_height = 92
         self.size = 4
@@ -18,7 +17,6 @@ class Database:
             os.mkdir(path)
 
         front_cascade = cv2.CascadeClassifier(self.front_haar)
-        side_cascade = cv2.CascadeClassifier(self.side_haar)
 
         webcam = cv2.VideoCapture(0)
         count = 0
@@ -27,13 +25,7 @@ class Database:
             im = cv2.flip(im, 1, 0)
             gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
             mini = cv2.resize(gray, (int(gray.shape[1] / self.size), int(gray.shape[0] / self.size)))
-
-            if len(front_cascade.detectMultiScale(mini)) == 1 and len(side_cascade.detectMultiScale(mini)) == 0:
-                faces = front_cascade.detectMultiScale(mini)
-            elif len(front_cascade.detectMultiScale(mini)) == 0 and len(side_cascade.detectMultiScale(mini)) == 1:
-                faces = side_cascade.detectMultiScale(mini)
-            else:
-                faces = front_cascade.detectMultiScale(mini)
+            faces = front_cascade.detectMultiScale(mini)
             faces = sorted(faces, key=lambda x: x[3])
             if faces:
                 face_i = faces[0]
