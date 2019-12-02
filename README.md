@@ -68,7 +68,7 @@
 1. Open run_on_webcam.py file, give path of both the above trained models.
 face_model.read('trained_models\\face_recognition.xml')
 expr_model.read('trained_models\\expression_classification.xml')
-2. Give path of the database folders to create labels.
-face_database_parent_directory = 'face_recognition\\database'
+2. Give path of the database folders to create labels.\
+face_database_parent_directory = 'face_recognition\\database'\
 expr_database_parent_directory = 'expression_recognition\\database'
 3. Run the file.
