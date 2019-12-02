@@ -45,6 +45,7 @@ for train_index, test_index in cv.split(x_train):
     model.save('..\\trained_models\\expression_classification_custom_database_' + str(fold) + '.xml')
     print("saved model: %s" % (str(fold)))
     fold += 1
+    break
 
 print('Testing Accuracy')
 print(testing_accuracy)
