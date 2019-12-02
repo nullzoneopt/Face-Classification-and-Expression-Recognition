@@ -11,8 +11,8 @@
 ### Generate Dataset
 1. Run generate_database.py file from face_recognition folder using below command.\
     python generate_database.py <person_name>
-2. webcam will pop up and take 100 pictures.
-3. Make sure a folder is created inside database folder with <person_name> with 100 grayscale pictures in it.
+2. webcam will pop up and take 1000 pictures.
+3. Make sure a folder is created inside database folder with <person_name>.
 4. Repeat above process for all the persons.
 
 ### Training model
@@ -40,7 +40,7 @@
 1. Run generate_database.py file from expression_recognition folder using below command.\
     python generate_database.py <expression>
     example: generate_database.py happy
-2. As soon as you run this file, start smiling, webcam will pop up and take 100 pictures.
+2. As soon as you run this file, start smiling, webcam will pop up and take 200 pictures.
 3. Repeat the above process for anger, disgust, fear, neutral, sadness, surprise
 3. Make sure all folders are created inside database folder for all 7 expressions.
 
