@@ -22,7 +22,7 @@ class Database:
 
         webcam = cv2.VideoCapture(0)
         count = 0
-        while count < 100:
+        while count < 200:
             (_, im) = webcam.read()
             im = cv2.flip(im, 1, 0)
             gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
