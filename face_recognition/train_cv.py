@@ -19,14 +19,11 @@ def evaluate(model, X_train, y_train):
             cnt += 1
     return correct / cnt
 
-haar_file = '..\\haar_classifiers\\haarcascade_frontalface_default.xml'
-haar_file_side = '..\\haar_classifiers\\haarcascade_profileface.xml'
-fn_dir = 'database'
 
-# Create a list of images and a list of corresponding names
-images, labels = helper.generate_dataset(fn_dir)
+parent_directory = 'database'
 
-# Create array from the two lists above
+images, labels = helper.generate_dataset(parent_directory)
+
 (images, labels) = [numpy.array(lis) for lis in [images, labels]]
 
 x_train, x_test, y_train, y_test = train_test_split(images, labels, test_size=0.2, random_state=42)
@@ -45,7 +42,7 @@ for train_index, test_index in cv.split(x_train):  # OpenCV trains a model from 
     training_fold_accuracy[fold] = evaluate(model, X_train_fold, y_train_fold)
     testing_fold_accuracy[fold] = evaluate(model, X_test_fold, y_test_fold)
     testing_accuracy[fold] = evaluate(model, x_test, y_test)
-    model.save('..\\trained_models\\face_recognition' + str(fold) + '.xml')
+    model.save('..\\trained_models\\face_recognition_5cv_' + str(fold) + '.xml')
     print("saved model: %s" % (str(fold)))
 
 print('Testing Accuracy')

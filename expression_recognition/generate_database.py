@@ -53,8 +53,8 @@ class Database:
                 im_mirror.save('%s/%s.jpg' % (path, pin), quality=95)
                 count += 1
 
-            cv2.imshow('Capturing', im)
-            key = cv2.waitKey(5)
+            cv2.imshow(label, im)
+            key = cv2.waitKey(10)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
@@ -64,10 +64,11 @@ class Database:
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        raise Exception("usage: python generate_database.py person_name")
+        raise Exception("usage: python generate_database.py happy/surprise/sadness/disgust/fear/neutral/anger")
     parent_database = 'database'
     if not os.path.isdir(parent_database):
         os.mkdir(parent_database)
+    # expressions = ['happy', 'surprise', 'sadness', 'disgust', 'fear', 'neutral', 'anger']
     label = sys.argv[1]
     database = Database()
     database.capture_photo(parent_database, label)

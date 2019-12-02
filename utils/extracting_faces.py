@@ -5,7 +5,7 @@ faceDet = cv2.CascadeClassifier("..\\haar_classifiers\\haarcascade_frontalface_d
 faceDet_two = cv2.CascadeClassifier("..\\haar_classifiers\\haarcascade_frontalface_alt2.xml")
 faceDet_three = cv2.CascadeClassifier("..\\haar_classifiers\\haarcascade_frontalface_alt.xml")
 faceDet_four = cv2.CascadeClassifier("..\\haar_classifiers\\haarcascade_frontalface_alt_tree.xml")
-emotions = ["neutral", "anger", "contempt", "disgust", "fear", "happy", "sadness", "surprise"]  # Define emotions
+emotions = ["neutral", "anger", "disgust", "fear", "happy", "sadness", "surprise"]  # Define emotions
 emotions = ["happy"]
 
 def detect_faces(emotion):

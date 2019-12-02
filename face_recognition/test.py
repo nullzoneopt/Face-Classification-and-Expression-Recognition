@@ -1,27 +1,25 @@
 import cv2
 from utils import helper as helper
-# import sys
-# import numpy
-# import os
-# from PIL import Image, ImageOps
+
 
 haar_file = '..\\haar_classifiers\\haarcascade_frontalface_default.xml'
 haar_file_side = '..\\haar_classifiers\\haarcascade_profileface.xml'
-datasets = 'database'
-fn_dir = 'database'
+
+Parent_directory = 'database'
+
 model = cv2.face.LBPHFaceRecognizer_create()
 model.read('..\\trained_models\\face_recognition.xml')
 
 # Create a list of images and a list of corresponding names
-names = helper.generate_classification_labels(fn_dir)
-(im_width, im_height) = (112, 92)
+names = helper.generate_classification_labels(Parent_directory)
+(image_width, image_height) = (112, 92)
+
 
 def identify(faces, model):
-    # print("here")
     for (x, y, w, h) in faces:
         cv2.rectangle(im, (x, y), (x + w, y + h), (255, 0, 0), 2)
         face = gray[y:y + h, x:x + w]
-        face_resize = cv2.resize(face, (im_width, im_width))
+        face_resize = cv2.resize(face, (image_width, image_width))
         # Try to recognize the face
         prediction = model.predict(face_resize)
         cv2.rectangle(im, (x, y), (x + w, y + h), (0, 255, 0), 3)
@@ -32,7 +30,6 @@ def identify(faces, model):
         else:
             cv2.putText(im, 'not recognized', (x - 10, y - 10),
                         cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 255))
-
 
 
 face_cascade = cv2.CascadeClassifier(haar_file)
@@ -55,13 +52,16 @@ while True:
         identify(faces, model)
         pass
     else:
-        immm = cv2.flip(im, 1)
-        gray = cv2.cvtColor(immm, cv2.COLOR_BGR2GRAY)
+        im_flip = cv2.flip(im, 1)
+        gray = cv2.cvtColor(im_flip, cv2.COLOR_BGR2GRAY)
         # print(gray)
         side_faces = side_face_cascade.detectMultiScale(gray, 1.3, 5)
         identify(side_faces, model)
 
-    cv2.imshow('OpenCV', im)
+    cv2.imshow('Face Recognition', im)
     key = cv2.waitKey(10)
-    if key == 27:
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+webcam.release()
+cv2.destroyAllWindows()

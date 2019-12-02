@@ -1,35 +1,33 @@
 import cv2
 from utils import helper as helper
-# import os
-# from PIL import Image, ImageOps
-# import sys
-# import numpy
+
 
 haar_file = 'haar_classifiers\\haarcascade_frontalface_default.xml'
 haar_file_side = 'haar_classifiers\\haarcascade_profileface.xml'
 
-face_fn_dir = 'face_recognition\\database'
+face_database_parent_directory = 'face_recognition\\database'
 
 face_model = cv2.face.LBPHFaceRecognizer_create()
 face_model.read('trained_models\\face_recognition.xml')
 
-expr_fn_dir = 'expression_recognition\\database'
+expr_database_parent_directory = 'expression_recognition\\database_112_92'
 
 expr_model = cv2.face.LBPHFaceRecognizer_create()
-expr_model.read('trained_models\\expression_classification.xml')
+# expr_model = cv2.face.FisherFaceRecognizer_create()
+expr_model.read('trained_models\\expression_classification_LBPHFace_5.xml')
 
 # Create a list of images and a list of corresponding names
-face_names = helper.generate_classification_labels(face_fn_dir)
-expr_names = helper.generate_classification_labels(expr_fn_dir)
+face_names = helper.generate_classification_labels(face_database_parent_directory)
+expr_names = helper.generate_classification_labels(expr_database_parent_directory)
 
-(im_width, im_height) = (112, 92)
+(image_width, image_height) = (112, 92)
 
 def identify(faces, face_model, expr_model):
     # print("here")
     for (x, y, w, h) in faces:
         cv2.rectangle(im, (x, y), (x + w, y + h), (255, 0, 0), 2)
         face = gray[y:y + h, x:x + w]
-        face_resize = cv2.resize(face, (im_width, im_width))
+        face_resize = cv2.resize(face, (image_width, image_height))
 
         # Try to recognize the face
         face_prediction = face_model.predict(face_resize)
@@ -81,7 +79,10 @@ while True:
         side_faces = side_face_cascade.detectMultiScale(gray, 1.3, 5)
         identify(side_faces, face_model, expr_model)
 
-    cv2.imshow('OpenCV', im)
+    cv2.imshow('Integrated Models', im)
     key = cv2.waitKey(10)
-    if key == 27:
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+webcam.release()
+cv2.destroyAllWindows()
