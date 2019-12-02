@@ -3,7 +3,6 @@ from utils import helper as helper
 
 
 haar_file = '..\\haar_classifiers\\haarcascade_frontalface_default.xml'
-haar_file_side = '..\\haar_classifiers\\haarcascade_profileface.xml'
 
 Parent_directory = 'database'
 
@@ -33,30 +32,22 @@ def identify(faces, model):
 
 
 face_cascade = cv2.CascadeClassifier(haar_file)
-side_face_cascade = cv2.CascadeClassifier(haar_file_side)
 webcam = cv2.VideoCapture(0)
 while True:
     (_, im) = webcam.read()
     gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-    side_faces = side_face_cascade.detectMultiScale(gray, 1.3, 5)
 
-    if len(faces) == 1 and len(side_faces) == 0:
+    if len(faces) == 1:
         identify(faces, model)
-        pass
-    elif len(faces) == 0 and len(side_faces) == 1:
-        identify(side_faces, model)
-        pass
-    elif len(faces) == 1 and len(side_faces) == 1:
-        identify(faces, model)
-        pass
     else:
         im_flip = cv2.flip(im, 1)
         gray = cv2.cvtColor(im_flip, cv2.COLOR_BGR2GRAY)
         # print(gray)
-        side_faces = side_face_cascade.detectMultiScale(gray, 1.3, 5)
-        identify(side_faces, model)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        if len(faces) == 1:
+            identify(faces, model)
 
     cv2.imshow('Expression Classification', im)
     if cv2.waitKey(2) & 0xFF == ord('q'):
