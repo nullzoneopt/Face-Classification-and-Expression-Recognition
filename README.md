@@ -18,20 +18,20 @@
 ### Training model
 1. Open train_cv.py file from face_recognition folder.
 2. Look for below line:\
-   fn_dir = 
+   parent_directory = 
 3. Give the path of the parent database folder.
 4. Run the file.
-5. train_cv file takes time to execute.
+5. train_cv.py file takes time to execute.
 4. Alternatively you can also run train.py file.
 6. Trained model would be saved under trained_models folder.
 
 ### Testing Face Recognition model
 1. Open train_cv.py file from face_recognition folder.
 2. Look for below line:\
-   fn_dir = 
+   parent_directory  = 
 3. Give the path of the parent database folder.
 4. Look for below line:\
-model.read('....')
+   model.read('....')
 5. Give the path of the trained model you want to use.
 6. Run the file.
 
@@ -47,26 +47,28 @@ model.read('....')
 ### Training model
 1. Open train_cv.py file from face_recognition folder.
 2. Look for below line:\
-   fn_dir = 
+   parent_directory = 
 3. Give the path of the parent database folder.
 4. Run the file.
-5. train_cv file takes time to execute.
+5. train_cv.py file takes time to execute.
 4. Alternatively you can also run train.py file.
 6. Trained model would be saved under trained_models folder.
 
 ### Testing Face Recognition model
-1. Open train_cv.py file from face_recognition folder.
+1. Open test_cv.py file from face_recognition folder.
 2. Look for below line:\
-   fn_dir = 
+   parent_directory = 
 3. Give the path of the parent database folder.
 4. Look for below line:\
-model.read('....')
+   model.read('....')
 5. Give the path of the trained model you want to use.
 6. Run the file.
 
 ### Integrated Model
 1. Open run_on_webcam.py file, give path of both the above trained models.
 face_model.read('trained_models\\face_recognition.xml')
-expr_model.read('trained_models\\expression_classification_LBPHFace_5.xml')
+expr_model.read('trained_models\\expression_classification.xml')
 2. Give path of the database folders to create labels.
+face_database_parent_directory = 'face_recognition\\database'
+expr_database_parent_directory = 'expression_recognition\\database'
 3. Run the file.
