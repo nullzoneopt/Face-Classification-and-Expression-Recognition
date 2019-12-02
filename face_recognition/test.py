@@ -59,8 +59,7 @@ while True:
         identify(side_faces, model)
 
     cv2.imshow('Face Recognition', im)
-    key = cv2.waitKey(10)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(2) & 0xFF == ord('q'):
         break
 
 webcam.release()

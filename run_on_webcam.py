@@ -14,7 +14,7 @@ expr_database_parent_directory = 'expression_recognition\\database_112_92'
 
 expr_model = cv2.face.LBPHFaceRecognizer_create()
 # expr_model = cv2.face.FisherFaceRecognizer_create()
-expr_model.read('trained_models\\expression_classification_LBPHFace_5.xml')
+expr_model.read('trained_models\\expression_classification.xml')
 
 # Create a list of images and a list of corresponding names
 face_names = helper.generate_classification_labels(face_database_parent_directory)
@@ -80,8 +80,7 @@ while True:
         identify(side_faces, face_model, expr_model)
 
     cv2.imshow('Integrated Models', im)
-    key = cv2.waitKey(10)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(2) & 0xFF == ord('q'):
         break
 
 webcam.release()
