@@ -10,7 +10,7 @@ face_database_parent_directory = 'face_recognition\\database'
 face_model = cv2.face.LBPHFaceRecognizer_create()
 face_model.read('trained_models\\face_recognition.xml')
 
-expr_database_parent_directory = 'expression_recognition\\database_112_92'
+expr_database_parent_directory = 'expression_recognition\\database'
 
 expr_model = cv2.face.LBPHFaceRecognizer_create()
 # expr_model = cv2.face.FisherFaceRecognizer_create()
